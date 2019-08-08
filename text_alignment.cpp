@@ -5,9 +5,7 @@
 #include <iostream> 
 
 void writeOut(const std::vector<std::string> outputLines, char* fileOut) {
-	/* This function outputs each line for the textbox, which is located within a vector, into the 
-	output file stream by means of a while loop. The file itself is closed outside of the file. */
-	std::ofstream out_str(fileOut);
+    std::ofstream out_str(fileOut);
     // Checking to make sure file was opened successfully
     if (!out_str.good()) {
     	std::cerr << "Failed to open " << fileOut << ".txt to write." << std::endl;
@@ -22,10 +20,7 @@ void writeOut(const std::vector<std::string> outputLines, char* fileOut) {
 }
 
 std::string singleWord(int width, const std::vector<std::string> words) {
-	/* This function deals with the circumstance of there being only one 
-	word in the input text. It outputs the proper format (left justified)
-	or raises an error if the word cannot fit. */
-	int wordLength = words[0].length();
+    int wordLength = words[0].length();
     if (wordLength <= width) {
     	std::string horizontalBorder = std::string((width + 4), '-');
     	int numSpaces = width - wordLength; 
@@ -40,12 +35,6 @@ std::string singleWord(int width, const std::vector<std::string> words) {
 }
 
 std::vector<std::string> flushLeft(unsigned int width, const std::vector<std::string> words) {
-	/* This function takes in the line width and a vector which is used to hold each individual 
-	line to be printed. A value of the number of available spaces, called 'numSpaces', keeps track 
-	of spaces and is used to determine whether a new line needs to be made. The second if statment 
-	is used to output a line without having an extra space attached to the last word in the line.
-	Booleans allow for clean flow and tell the last if statement whether a line is finished and needs 
-	to be added to the vector. Variables 'coreLine' and 'numSpaces' are continually recycled. */
 	std::string horizontalBorder = std::string((width + 4), '-');
 	std::vector<std::string> leftJustification;
 	leftJustification.push_back(horizontalBorder);
@@ -87,9 +76,6 @@ std::vector<std::string> flushLeft(unsigned int width, const std::vector<std::st
 }
 
 std::vector<std::string> flushRight(int width, const std::vector<std::string> words) {
-	/* This function also uses booleans and the recyclable variables 'numSpaces' and 'coreLine' 
-	to build lines. The main difference with this function is that it takes the number of available 
-	spaces and adds them before the 'coreLine', which is a string that holds all of the words. */
 	std::string horizontalBorder = std::string((width + 4), '-');
 	std::vector<std::string> rightJustification;
 	rightJustification.push_back(horizontalBorder);
@@ -134,13 +120,6 @@ std::vector<std::string> flushRight(int width, const std::vector<std::string> wo
 }
 
 std::vector<std::string> fullJustify(int width, const std::vector<std::string> words) { 
-	/* This function uses another vector called 'storedWords' which holds each of the words 
-	to be printed on a given line. The function uses '.clear()' to erase the contents of the vector 
-	when a new line needs to be printed. The function keeps track of the number of spaces and 
-	eventually divides that value using integer division by the number of words minus one to get the 
-	number of space slots. The extra spaces are determined using modulo and a for loop adds one of 
-	these extra spaces between each two words until there aren't any left. 
-	*/ 
 	std::string horizontalBorder = std::string((width + 4), '-');
 	std::vector<std::string> fullJustification;
 	fullJustification.push_back(horizontalBorder);
@@ -279,7 +258,6 @@ int main(int argc, char* argv[]) {
 	if (wordsList.size() == 1) {
 		std::cout << singleWord(width, wordsList) << std::endl;
 	}  
-	// Outputs justification type based on input from terminal 
     if (justificationType == "flush_left") {
     	std::vector<std::string> leftJustified = flushLeft(width, wordsList);
     	writeOut(leftJustified, argv[2]);
